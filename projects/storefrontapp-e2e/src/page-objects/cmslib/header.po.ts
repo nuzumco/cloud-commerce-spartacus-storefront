@@ -6,6 +6,9 @@ export class Header {
   readonly siteLogoComponent: ElementFinder = this.header.element(
     by.dynamicSlot('SiteLogo', 'cx-banner')
   );
+  readonly storeFinderLink: ElementFinder = this.header.element(
+    by.dynamicSlot('StoreFinder', 'cx-link')
+  );
   readonly searchComponent: ElementFinder = this.header.element(
     by.dynamicSlot('SearchBox', 'cx-searchbox')
   );
@@ -53,6 +56,11 @@ export class Header {
   async performSearch(searchKey: string, skipEnter?: boolean) {
     // search for camera
     await E2EUtil.fillInput(this.searchInput, searchKey, skipEnter);
+  }
+
+  async goToStoreFinder() {
+    // search for camera
+    await this.storeFinderLink.click();
   }
 
   async isLoggedIn(): Promise<boolean> {
