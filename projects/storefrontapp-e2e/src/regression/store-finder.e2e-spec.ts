@@ -1,10 +1,10 @@
 import { StoreFinderPage } from '../page-objects/store-finder/store-finder.po';
 import { HomePage } from '../page-objects/home.po';
-import { by, element, browser } from 'protractor';
+import { by, browser } from 'protractor';
 
 import { E2EUtil } from '../e2e-util';
 
-fdescribe('Store Finder interactions', () => {
+describe('Store Finder interactions', () => {
   let home: HomePage;
   let storeFinderPage: StoreFinderPage;
 
