@@ -25,6 +25,7 @@ fdescribe('Store Finder interactions', () => {
   /**
    * Should search store finder with string
    */
+  // TODO: Wait for #751
   xit('should go to storefinder and search for Tokyo', async () => {
     await home.navigateTo();
     await storeFinderPage.navigateTo();
@@ -47,7 +48,7 @@ fdescribe('Store Finder interactions', () => {
   /**
    * Should list Canada stores via 'view all stores' btn
    */
-  fit('should go to storefinder and show list of results', async () => {
+  it('should go to storefinder and navigate to the details', async () => {
     await home.navigateTo();
     await storeFinderPage.navigateTo();
     await storeFinderPage.viewAllStoresBtn.click();
@@ -65,12 +66,20 @@ fdescribe('Store Finder interactions', () => {
     );
     expect(await newYorkStoreBtn.getText()).toBe('New York Store');
     newYorkStoreBtn.click();
-    // await storeFinderPage.storeDetails.isPresent();
+
+    await storeFinderPage.waitForStoreDetails();
     expect(await browser.getCurrentUrl()).toBe(
       'http://localhost:4200/store-finder/country/US/region/US-NY/shop_new_york_1'
     );
     expect(await storeFinderPage.storeDetailsTitle.getText()).toBe(
       'New York Store'
     );
+    expect(await storeFinderPage.storeDetailsAddress.getText()).toContain(
+      'New York, New York, 10002'
+    );
+    expect(await storeFinderPage.storeDetailsSchedule.getText()).toContain(
+      'Store hours'
+    );
+    expect(await storeFinderPage.storeDetailsMap.isPresent()).toBeTruthy();
   });
 });

@@ -18,6 +18,18 @@ export class StoreFinderPage extends AppPage {
   readonly storeDetailsTitle: ElementFinder = this.storeDetails.element(
     by.css('h2')
   );
+  readonly storeDetailsAddress: ElementFinder = this.storeDetails.element(
+    by.css('.storeAddress')
+  );
+  readonly storeDetailsContact: ElementFinder = this.storeDetails.element(
+    by.css('.contactInfo')
+  );
+  readonly storeDetailsSchedule: ElementFinder = this.storeDetails.element(
+    by.css('.schedule')
+  );
+  readonly storeDetailsMap: ElementFinder = this.page.element(
+    by.tagName('cx-store-finder-map')
+  );
   readonly searchInput: ElementFinder = this.page.element(
     by.css('.cx-store-finder-search input[type="text"]')
   );
@@ -50,5 +62,8 @@ export class StoreFinderPage extends AppPage {
 
   async waitForReady() {
     await E2EUtil.wait4PresentElement(this.page);
+  }
+  async waitForStoreDetails() {
+    await E2EUtil.wait4PresentElement(this.storeDetails);
   }
 }
