@@ -5,7 +5,7 @@ import { filter, tap, map, take } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 import { Page } from '../model/page.model';
 import { ContentSlotData } from '../model/content-slot.model';
-import { DefaultPageService } from '../occ/default-page.service';
+import { DefaultPageService } from '../services/default-page.service';
 import { StateWithCms } from '../store/cms-state';
 import { CmsComponent } from '../../occ/occ-models/cms-component.models';
 
@@ -94,6 +94,21 @@ export class CmsService {
         items: itemList
       })
     );
+  }
+
+  /**
+   * Refresh the content of the latest cms page
+   */
+  refreshLatestPage() {
+    this.store.dispatch(new fromStore.RefreshLatestPage());
+  }
+
+  /**
+   * Refresh cms component's content
+   * @param uid : component uid
+   */
+  refreshComponent(uid: string) {
+    this.store.dispatch(new fromStore.RefreshComponent(uid));
   }
 
   /**
