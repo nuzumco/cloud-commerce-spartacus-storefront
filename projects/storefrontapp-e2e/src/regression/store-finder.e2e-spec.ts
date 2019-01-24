@@ -33,6 +33,27 @@ describe('Store Finder interactions', () => {
     await storeFinderPage.searchBtn.click();
   });
 
+  xit('should go to storefinder and show search results', async () => {
+    await home.navigateTo();
+    await storeFinderPage.navigateTo();
+    await E2EUtil.fillInput(storeFinderPage.searchInput, 'Tokyo');
+    await storeFinderPage.searchBtn.click();
+    const results = await storeFinderPage.countryListRow;
+
+    expect(results.length).toBeGreaterThan(0);
+  });
+
+  xit('should go to storefinder and search for Tokyo', async () => {
+    await home.navigateTo();
+    await storeFinderPage.navigateTo();
+    await E2EUtil.fillInput(storeFinderPage.searchInput, 'Tokyo');
+    await storeFinderPage.searchBtn.click();
+    await storeFinderPage.waitForCountryRow();
+    const results = await storeFinderPage.countryListRow;
+
+    expect(results.length).toBe(10);
+  });
+
   /**
    * Should show all stores
    */
